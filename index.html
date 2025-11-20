@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Portfolio</title>
+    <title>My Portfolio</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,600&family=JetBrains+Mono:wght@300;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
@@ -12,10 +15,9 @@
         :root {
             --bg-color: #0a0a0a;
             --text-color: #f0f0f0;
-            --accent-code: #00ff9d;
-            --accent-stage: #ff4d4d;
-            --accent-design: #fff700;
-            --panel-width: 33.33vw;
+            --accent-code: #00ff9d;    /* Matrix Green */
+            --accent-stage: #ff4d4d;   /* Theatre Red */
+            --accent-design: #fff700;  /* Cyber Yellow */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -24,7 +26,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: 'Helvetica Neue', sans-serif;
-            overflow: hidden; /* Initially hide scroll */
+            overflow: hidden;
             height: 100vh;
             width: 100vw;
         }
@@ -32,168 +34,94 @@
         /* --- CUSTOM CURSOR --- */
         #cursor {
             position: fixed;
-            top: 0; left: 0;
-            width: 20px; height: 20px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            mix-blend-mode: difference;
-            z-index: 9999;
+            top: 0; left: 0; width: 20px; height: 20px;
+            background: white; border-radius: 50%;
+            pointer-events: none; mix-blend-mode: difference; z-index: 9999;
             transition: transform 0.1s, width 0.3s, height 0.3s;
             transform: translate(-50%, -50%);
         }
-        
         body:hover #cursor.hovered {
-            width: 80px;
-            height: 80px;
-            background: transparent;
-            border: 2px solid white;
+            width: 80px; height: 80px; background: transparent; border: 2px solid white;
         }
 
-        /* --- MAIN CONTAINER --- */
+        /* --- LAYOUT --- */
         .container {
-            display: flex;
-            width: 100%;
-            height: 100%;
+            display: flex; width: 100%; height: 100%;
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* --- PANELS --- */
         .panel {
-            flex: 1;
-            height: 100%;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            flex: 1; height: 100%; position: relative;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
             border-right: 1px solid rgba(255,255,255,0.1);
             transition: flex 0.6s ease;
             overflow: hidden;
         }
-
         .panel:last-child { border-right: none; }
 
-        /* Hover interaction for expanding panels */
+        /* Interaction */
         .container:hover .panel { flex: 0.8; opacity: 0.4; filter: grayscale(100%); }
         .container .panel:hover { flex: 2; opacity: 1; filter: grayscale(0%); cursor: none; }
 
-        /* --- TYPOGRAPHY & STYLING PER SECTION --- */
-        
-        /* CODE SECTION */
-        .panel.code {
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .panel.code h1 { color: transparent; -webkit-text-stroke: 1px var(--accent-code); }
-        .panel.code:hover h1 { color: var(--accent-code); -webkit-text-stroke: 0; }
-
-        /* STAGE SECTION */
-        .panel.stage {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-        }
-        .panel.stage h1 { color: transparent; -webkit-text-stroke: 1px var(--accent-stage); }
-        .panel.stage:hover h1 { color: var(--accent-stage); -webkit-text-stroke: 0; }
-
-        /* DESIGN SECTION */
-        .panel.design {
-            font-family: 'Syncopate', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-        }
+        /* --- TYPOGRAPHY --- */
+        /* DESIGN (Left) */
+        .panel.design { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -2px; }
         .panel.design h1 { color: transparent; -webkit-text-stroke: 1px var(--accent-design); }
         .panel.design:hover h1 { color: var(--accent-design); -webkit-text-stroke: 0; }
 
-        /* HEADINGS */
-        h1 {
-            font-size: 4vw;
-            transition: all 0.4s ease;
-            white-space: nowrap;
-            z-index: 10;
-            pointer-events: none;
-        }
-        
-        .subtitle {
-            margin-top: 20px;
-            font-size: 1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
+        /* CODE (Center) */
+        .panel.code { font-family: 'JetBrains Mono', monospace; }
+        .panel.code h1 { color: transparent; -webkit-text-stroke: 1px var(--accent-code); }
+        .panel.code:hover h1 { color: var(--accent-code); -webkit-text-stroke: 0; }
 
-        .panel:hover .subtitle {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* STAGE (Right) */
+        .panel.stage { font-family: 'Cormorant Garamond', serif; font-style: italic; }
+        .panel.stage h1 { color: transparent; -webkit-text-stroke: 1px var(--accent-stage); }
+        .panel.stage:hover h1 { color: var(--accent-stage); -webkit-text-stroke: 0; }
 
-        /* --- BACKGROUNDS (Abstract visuals) --- */
+        h1 { font-size: 4vw; transition: all 0.4s ease; white-space: nowrap; z-index: 10; pointer-events: none; }
+        .subtitle { margin-top: 20px; font-size: 1rem; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; z-index: 10; pointer-events: none;}
+        .panel:hover .subtitle { opacity: 1; transform: translateY(0); }
+
+        /* --- BACKGROUND IMAGES --- */
         .bg-visual {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0.1;
-            transition: opacity 0.5s;
-            z-index: 0;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.2; transition: opacity 0.5s; z-index: 0;
+            
+            /* IMPORTANT: This ensures the image covers the panel without stretching */
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
         }
-        .panel:hover .bg-visual { opacity: 0.3; }
+        .panel:hover .bg-visual { opacity: 0.5; }
 
-        /* --- CONTENT MODALS (Hidden by default) --- */
+        /* --- MODALS --- */
         .content-overlay {
-            position: fixed;
-            top: 100%;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--bg-color);
-            z-index: 100;
+            position: fixed; top: 100%; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-color); z-index: 100;
             transition: top 0.8s cubic-bezier(0.86, 0, 0.07, 1);
-            padding: 50px;
-            overflow-y: auto;
+            padding: 50px; overflow-y: auto;
         }
-
         .content-overlay.active { top: 0; }
-
         .close-btn {
-            position: absolute;
-            top: 30px; right: 30px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            border: 1px solid white;
-            border-radius: 50%;
-            width: 50px; height: 50px;
+            position: absolute; top: 30px; right: 30px;
+            font-family: 'JetBrains Mono', monospace; font-size: 1.5rem;
+            border: 1px solid white; border-radius: 50%; width: 50px; height: 50px;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.3s;
         }
         .close-btn:hover { background: white; color: black; transform: rotate(90deg); }
-
-        /* GRID LAYOUT FOR PROJECTS */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 60px;
-        }
-
-        .project-card {
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 20px;
-            transition: transform 0.3s;
-        }
-        .project-card:hover { transform: translateY(-5px); border-color: white; }
-        .project-card h3 { margin-bottom: 10px; }
-        .project-card p { font-size: 0.9rem; color: #aaa; line-height: 1.5; }
         
-        .section-title {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 60px; }
+        .project-card { border: 1px solid rgba(255,255,255,0.2); padding: 20px; transition: transform 0.3s; }
+        .project-card:hover { transform: translateY(-5px); border-color: white; }
+        .section-title { font-size: 3rem; margin-bottom: 10px; }
 
-        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             .panel { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
             h1 { font-size: 2rem; }
-            .panel:hover { flex: 1.5; }
         }
     </style>
 </head>
@@ -202,125 +130,74 @@
     <div id="cursor"></div>
 
     <div class="container">
+        
+        <div class="panel design" onclick="openSection('design-content')">
+            <div class="bg-visual" style="background-image: url('design.jpg'); background-color: #111;"></div>
+            <h1>DESIGNER</h1>
+            <div class="subtitle">Posters • UI • Branding</div>
+        </div>
+
         <div class="panel code" onclick="openSection('code-content')">
-            <div class="bg-visual" style="background: radial-gradient(circle at center, #003300 0%, #000 70%);"></div>
+            <div class="bg-visual" style="background-image: url('code.jpg'); background-color: #001100;"></div>
             <h1>&lt;DEVELOPER /&gt;</h1>
             <div class="subtitle">Python • React • Experiments</div>
         </div>
 
         <div class="panel stage" onclick="openSection('stage-content')">
-            <div class="bg-visual" style="background: radial-gradient(circle at center, #330000 0%, #000 70%);"></div>
+            <div class="bg-visual" style="background-image: url('stage.jpg'); background-color: #1a0000;"></div>
             <h1>The Actor</h1>
             <div class="subtitle">Theatre • Voice • Motion</div>
         </div>
 
-        <div class="panel design" onclick="openSection('design-content')">
-            <div class="bg-visual" style="background: radial-gradient(circle at center, #333300 0%, #000 70%);"></div>
-            <h1>DESIGNER</h1>
-            <div class="subtitle">Posters • UI • Branding</div>
+    </div>
+
+    <div id="design-content" class="content-overlay">
+        <div class="close-btn" onclick="closeSection()">×</div>
+        <h2 class="section-title" style="font-family: 'Syncopate'; color: var(--accent-design);">EXHIBITION</h2>
+        <div class="project-grid">
+            <div class="project-card"><h3>Macbeth Poster</h3><p>Kinetic typography design.</p></div>
+            <div class="project-card"><h3>App UI Kit</h3><p>Dark mode interface design.</p></div>
         </div>
     </div>
 
     <div id="code-content" class="content-overlay">
         <div class="close-btn" onclick="closeSection()">×</div>
         <h2 class="section-title" style="font-family: 'JetBrains Mono'; color: var(--accent-code);">System.Logs</h2>
-        <p style="font-family: 'JetBrains Mono'; margin-bottom: 40px;">Current Status: Building inventive web experiences.</p>
-        
         <div class="project-grid">
-            <div class="project-card">
-                <h3>GitHub Portfolio Generator</h3>
-                <p>A Python script that automates portfolio creation using the GitHub API.</p>
-            </div>
-            <div class="project-card">
-                <h3>Neural Network Visualizer</h3>
-                <p>Interactive JS canvas project visualizing nodes and weights in real-time.</p>
-            </div>
-            <div class="project-card">
-                <h3>CLI To-Do List</h3>
-                <p>Rust-based command line tool for high-performance task management.</p>
-            </div>
+            <div class="project-card"><h3>Portfolio Generator</h3><p>Automated GitHub API integration.</p></div>
+            <div class="project-card"><h3>CLI Tool</h3><p>Rust-based task manager.</p></div>
         </div>
     </div>
 
     <div id="stage-content" class="content-overlay">
         <div class="close-btn" onclick="closeSection()">×</div>
         <h2 class="section-title" style="font-family: 'Cormorant Garamond'; color: var(--accent-stage); font-style: italic;">The Repertoire</h2>
-        <p style="font-family: 'Cormorant Garamond'; font-size: 1.2rem; margin-bottom: 40px;">"All the world's a stage..."</p>
-        
         <div class="project-grid">
-            <div class="project-card">
-                <h3>Hamlet - The Prince</h3>
-                <p>Lead role in the 2023 City Theatre production. [Link to Review/Video]</p>
-            </div>
-            <div class="project-card">
-                <h3>Vocal Reel 2024</h3>
-                <p>A compilation of jazz, musical theatre, and pop vocal performances.</p>
-            </div>
-            <div class="project-card">
-                <h3>Short Film: "Echoes"</h3>
-                <p>Supporting actor in award-winning indie short film.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="design-content" class="content-overlay">
-        <div class="close-btn" onclick="closeSection()">×</div>
-        <h2 class="section-title" style="font-family: 'Syncopate'; color: var(--accent-design);">EXHIBITION</h2>
-        <p style="font-family: 'Helvetica Neue'; margin-bottom: 40px;">Visual communication for the arts.</p>
-        
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>"Macbeth" Poster Series</h3>
-                <p>Typography-driven poster series exploring kinetic distortion.</p>
-            </div>
-            <div class="project-card">
-                <h3>Festival Branding</h3>
-                <p>Full identity kit for the Summer Arts Fringe Festival.</p>
-            </div>
-            <div class="project-card">
-                <h3>UI Kit: "Noir"</h3>
-                <p>A dark-mode UI kit for mobile applications focused on readability.</p>
-            </div>
+            <div class="project-card"><h3>Hamlet</h3><p>Lead role, 2023.</p></div>
+            <div class="project-card"><h3>Vocal Reel</h3><p>Jazz and Pop selections.</p></div>
         </div>
     </div>
 
     <script>
-        // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
         const panels = document.querySelectorAll('.panel');
         const closeBtns = document.querySelectorAll('.close-btn');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        // Add hover state to cursor when over interactive elements
+        document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
         const addHover = () => cursor.classList.add('hovered');
         const removeHover = () => cursor.classList.remove('hovered');
+        
+        panels.forEach(p => { p.addEventListener('mouseenter', addHover); p.addEventListener('mouseleave', removeHover); });
+        closeBtns.forEach(b => { b.addEventListener('mouseenter', addHover); b.addEventListener('mouseleave', removeHover); });
 
-        panels.forEach(panel => {
-            panel.addEventListener('mouseenter', addHover);
-            panel.addEventListener('mouseleave', removeHover);
-        });
-
-        closeBtns.forEach(btn => {
-            btn.addEventListener('mouseenter', addHover);
-            btn.addEventListener('mouseleave', removeHover);
-        });
-
-        // Navigation Logic
         function openSection(id) {
             document.getElementById(id).classList.add('active');
-            document.body.style.overflow = 'auto'; // Allow scrolling in modal
+            document.body.style.overflow = 'auto';
             removeHover();
         }
-
         function closeSection() {
-            document.querySelectorAll('.content-overlay').forEach(el => {
-                el.classList.remove('active');
-            });
-            document.body.style.overflow = 'hidden'; // Lock scroll
+            document.querySelectorAll('.content-overlay').forEach(el => el.classList.remove('active'));
+            document.body.style.overflow = 'hidden';
         }
     </script>
 </body>
