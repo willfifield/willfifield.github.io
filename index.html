@@ -108,7 +108,15 @@
         .close-btn:hover { background: white; color: black; transform: rotate(90deg); }
         
         /* --- PROJECT GRID & CARDS --- */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; margin-top: 60px; padding-bottom: 50px; }
+        /* Note: 'align-items: start' ensures cards don't stretch weirdly */
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 30px; 
+            margin-top: 60px; 
+            padding-bottom: 50px; 
+            align-items: start; 
+        }
         
         .project-card { 
             border: 1px solid rgba(255,255,255,0.2); 
@@ -116,12 +124,18 @@
             transition: transform 0.3s, border-color 0.3s; 
             display: flex; flex-direction: column; gap: 10px;
             position: relative;
+            background: rgba(0,0,0,0.3); /* Slight darkness behind text */
         }
         .project-card:hover { transform: translateY(-5px); border-color: white; }
         
+        /* FIX FOR IMAGES CHOPPING OFF */
         .project-card img {
-            width: 100%; height: 200px; object-fit: cover;
-            margin-bottom: 15px; opacity: 0.8; border-radius: 4px;
+            width: 100%; 
+            height: auto; /* Lets the image be its natural height */
+            object-fit: cover;
+            margin-bottom: 15px; 
+            opacity: 0.9; 
+            border-radius: 4px;
         }
         
         .role-badge {
@@ -208,11 +222,19 @@
             </div>
 
             <div class="project-card" style="border-color: #ff0050;">
+                <img src="images/giant.jpg" alt="Giant Puppet Build" onerror="this.style.display='none'">
+                <span class="role-badge" style="color: #ff0050">Maker / Design</span>
+                <h3>Giant Puppet Build</h3>
+                <p><strong>Jack and the Beanstalk</strong></p>
+                <p>Designed and constructed large-scale articulation puppets and mechanics for the 2026 production.</p>
+                <a href="https://www.tiktok.com/@willfifield_" target="_blank" class="tiktok-btn"><i class="fab fa-tiktok"></i> Watch the Build</a>
+            </div>
+
+            <div class="project-card" style="border-color: #ff0050;">
                 <img src="images/props.jpg" alt="Prop Making" onerror="this.style.display='none'">
                 <span class="role-badge" style="color: #ff0050">Maker / Set Design</span>
-                <h3>Prop Making & Sets</h3>
-                <p>Behind the scenes creation of giant puppets, stage sets, and intricate props.</p>
-                <a href="https://www.tiktok.com/@willfifield_" target="_blank" class="tiktok-btn"><i class="fab fa-tiktok"></i> View My TikTok</a>
+                <h3>General Prop Making</h3>
+                <p>Behind the scenes creation of stage sets and intricate props for various productions.</p>
             </div>
             
              <div class="project-card">
