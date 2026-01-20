@@ -108,34 +108,69 @@
         .close-btn:hover { background: white; color: black; transform: rotate(90deg); }
         
         /* --- PROJECT GRID & CARDS --- */
-        /* Note: 'align-items: start' ensures cards don't stretch weirdly */
+        /* --- UPDATED PROJECT CARD STYLES --- */
+
         .project-grid { 
             display: grid; 
+            /* This ensures columns are at least 300px but share remaining space */
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 30px; 
+            gap: 20px; 
             margin-top: 60px; 
             padding-bottom: 50px; 
-            align-items: start; 
+            align-items: start; /* Prevents cards from stretching to match row height */
         }
-        
+
         .project-card { 
             border: 1px solid rgba(255,255,255,0.2); 
-            padding: 25px; 
-            transition: transform 0.3s, border-color 0.3s; 
-            display: flex; flex-direction: column; gap: 10px;
+            padding: 20px; 
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px; /* Slight rounded corner looks more modern */
             position: relative;
-            background: rgba(0,0,0,0.3); /* Slight darkness behind text */
+            overflow: hidden; /* Keeps content inside the rounded corners */
+            transition: transform 0.3s ease, border-color 0.3s ease;
+    
+            /* Flex setup to stack content */
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px;
         }
-        .project-card:hover { transform: translateY(-5px); border-color: white; }
-        
-        /* FIX FOR IMAGES CHOPPING OFF */
+
+        /* Hover effect for the card container */
+        .project-card:hover { 
+            transform: translateY(-5px); 
+            border-color: white; 
+            z-index: 10; /* Brings the hovered card slightly forward */
+        }
+
+        /* --- THE IMAGE MAGIC --- */
         .project-card img {
-            width: 100%; 
-            height: auto; /* Lets the image be its natural height */
-            object-fit: cover;
-            margin-bottom: 15px; 
-            opacity: 0.9; 
+            width: 100%;
+    
+            /* STATE 1: LOCKED SQUARE */
+            height: 300px; /* Fixed height for uniformity */
+            object-fit: cover; /* Crops the image to fill the square perfectly */
+            object-position: top center; /* Focuses on faces/top of posters */
+    
             border-radius: 4px;
+            opacity: 0.9;
+    
+            /* The Animation Settings */
+            transition: height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s;
+        }
+
+        /* STATE 2: HOVER REVEAL */
+        .project-card:hover img {
+            /* We use a large max-height to simulate 'auto' because 
+               CSS cannot animate straight to 'height: auto' smoothly. */
+            height: 600px; /* Tall enough to show your full posters */
+            object-fit: cover; /* Keeps the width filled */
+            opacity: 1;
+        }
+
+        /* Optional: Make the text fade in/out slightly to focus on image? 
+           Remove this block if you want text always fully visible. */
+        .project-card p {
+            transition: opacity 0.3s;
         }
         
         .role-badge {
